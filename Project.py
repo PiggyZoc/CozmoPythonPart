@@ -116,7 +116,7 @@ class CozmoProject():
 
         # 设置端口号
         self.port = port
-        #self.s.connect((self.host, self.port))
+        self.s.connect((self.host, self.port))
         self.food_number_observed = -1
         self.cube = None
         self.distance = 0
@@ -203,7 +203,7 @@ class CozmoProject():
     def run(self):
         
         #发现食物id
-        '''
+     
         asyncio.set_event_loop(asyncio.new_event_loop())
         loop = asyncio.get_event_loop()
         tasks = [  
@@ -212,15 +212,14 @@ class CozmoProject():
         loop.run_until_complete(asyncio.wait(tasks))  
         loop.close()
         food_number = self.food_number_observed
-        '''
-        '''
+ 
         try:
              self.send_message('2')
         except Exception as e:
              print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
              print(e)
              pass
-        '''
+       
 
        
         ###################################
@@ -239,7 +238,7 @@ class CozmoProject():
             # ——这里添加一条圆盘·停止·旋转的语句——
             #  0 代表停止
             #  1 代表转动，，可以自己定义
-            '''
+       
             try:
                 self.send_message('4')
                 self.robot.pickup_object(self.cube,use_pre_dock_pose=True, num_retries=10).wait_for_completed()
@@ -247,18 +246,18 @@ class CozmoProject():
                 print(e)
                 print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGg")
                 pass
-            '''
+        
             # ——↑操作cozmo拿取——
             #time.sleep(3)   # 拿取动作大约占用3秒，视具体情况修改
             # ——这里添加一条圆盘·开始·旋转的语句——
-            '''
+            
             try:
                 self.send_message('2')
             except Exception as e:
                 print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
                 print(e)
                 pass
-            '''    
+            
             # cozmo向客人移动
             # 移动部分
             self.robot.turn_in_place(degrees(180)).wait_for_completed()
@@ -269,7 +268,6 @@ class CozmoProject():
                 width = image.width
                 center = detectRoute(biMatrix)
                 self.carMoveWithPathTrack(center,width,40)
-                #if self.distance > 300:
                 if self.distance>240:
                     break
             self.distance = 0
